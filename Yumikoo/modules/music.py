@@ -447,7 +447,7 @@ async def resume(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["end"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["leavevc"], prefixes=["/", "!"]))    
 async def stop(_, msg: Message):
     chat_id = msg.chat.id
     if str(chat_id) in str(pytgcalls.active_calls):
@@ -460,7 +460,7 @@ async def stop(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["leavevc"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["end"], prefixes=["/", "!"]))    
 async def leavevc(_, msg: Message):
     chat_id = msg.chat.id
     await pytgcalls.leave_group_call(chat_id)
