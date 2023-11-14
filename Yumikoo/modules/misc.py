@@ -240,7 +240,7 @@ async def getid(client, message):
 @Yumikoo.on_message(filters.command(["github", "git"]))
 async def github(_, message):
     if len(message.command) != 2:
-        await message.reply_text("ᴄʜᴇᴄᴋ ɢɪᴛʜᴜʙ ᴘʀᴏғɪʟᴇ ᴜsᴀɢᴇ : /github Sumit0045")
+        await message.reply_text("ᴄʜᴇᴄᴋ ɢɪᴛʜᴜʙ ᴘʀᴏғɪʟᴇ ᴜsᴀɢᴇ : /github DAXXTEAM")
         return
     username = message.text.split(None, 1)[1]
     URL = f'https://api.github.com/users/{username}'
