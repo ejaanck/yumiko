@@ -6,7 +6,7 @@ API_ID = int(getenv("API_ID", "6435225"))
 API_HASH = getenv("API_HASH", "4e984ea35f854762dcde906dce426c2d")
 BOT_USERNAME = getenv("BOT_USERNAME", "YumikooBot")
 COMMAND_HANDLER = ["/", "!"]
-BOT_TOKEN = getenv("BOT_TOKEN", "6196153811:AAHKVoerIa_2MIpX-dnuRi1vialyzt6RLZ0")
+BOT_TOKEN = getenv("BOT_TOKEN", "6196153811:AAH6Gr18wpnO5gNndm0xvvqEQllLEIyMOp4")
 OWNER_ID = int(getenv("OWNER_ID", "6691393517"))
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", "6691393517").split()))
 MONGO_URL = getenv("MONGO_URL", "mongodb+srv://MRDAXX:MRDAXX@mrdaxx.prky3aj.mongodb.net/?retryWrites=true&w=majority")
