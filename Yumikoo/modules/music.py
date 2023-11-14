@@ -1,4 +1,4 @@
-import os, aiofiles, aiohttp, ffmpeg, random, textwrap, re
+import os, aiofiles, aiohttp, random, textwrap, re
 import numpy as np
 import requests
 from os import path
@@ -15,10 +15,9 @@ from pyrogram.errors import UserAlreadyParticipant
 from Yumikoo.Helper.requirements import get_url, get_file_name, converter, downloader, admins as a, set_admins as set
 from Yumikoo.Helper import requirements as rq
 from Yumikoo.Helper.errors import DurationLimitError
-from pytgcalls import StreamType
 from pytgcalls.types import Update
-from pytgcalls.types.input_stream import InputStream
-from pytgcalls.types.input_stream import InputAudioStream
+from pytgcalls.types import AudioPiped, AudioQuality, AudioParameters
+
 
 
 DURATION_LIMIT = 300
@@ -218,11 +217,7 @@ async def play(_, message: Message):
 
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await converter(
-            (await message.reply_to_message.download(file_name))
-            if not os.path.isfile(os.path.join("downloads", file_name))
-            else file_name
-        )
+        file_path = file_name
             
     elif url:
         try:
@@ -257,7 +252,7 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await converter(downloader(url))
+        file_path = await get_audio_stream(url)
     else:
         if len(message.command) < 2:
             await lel.edit(
@@ -302,7 +297,7 @@ async def play(_, message: Message):
             return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
-        file_path = await converter(downloader(url))
+        file_path = await get_audio_stream(url)
     ACTV_CALLS = []
     chat_id = message.chat.id
     for x in pytgcalls.active_calls:
@@ -317,15 +312,12 @@ async def play(_, message: Message):
        
     else:
         await pytgcalls.join_group_call(
-                chat_id, 
-                InputStream(
-                    InputAudioStream(
-                        file_path,
-                    ),
-                ),
-                stream_type=StreamType().local_stream,
-            )
-
+            chat_id,
+            AudioPiped(
+                file_path,
+                AudioParameters.from_quality(AudioQuality.STUDIO),
+            ),
+        )
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
@@ -354,10 +346,9 @@ async def skip(_, message: Message):
         else:
             await pytgcalls.change_stream(
                 chat_id,
-                InputStream(
-                    InputAudioStream(
-                        rq.get(chat_id)["file"],
-                    ),
+                AudioPiped(
+                    rq.get(chat_id)["file"],
+                    AudioParameters.from_quality(AudioQuality.STUDIO),
                 ),
             )
         await message.reply_text("**ᴍᴜsɪᴄ ᴘʟᴀʏᴇʀ sᴋɪᴘᴘᴇᴅ ᴛʜᴇ sᴏɴɢ.**")
@@ -375,11 +366,10 @@ async def on_stream_end(_, update: Update) -> None:
         await pytgcalls.leave_group_call(chat_id)
     else:
         await pytgcalls.change_stream(
-            chat_id, 
-            InputStream(
-                InputAudioStream(
-                    rq.get(chat_id)["file"],
-                ),
+            chat_id,
+            AudioPiped(
+                audio,
+                AudioParameters.from_quality(AudioQuality.STUDIO),
             ),
         )
 
