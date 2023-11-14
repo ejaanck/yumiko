@@ -1,11 +1,14 @@
-import asyncio
-from os import path
 import os
+import asyncio
+import yt_dlp
+from os import path
 from Yumikoo.Helper.errors import FFmpegReturnCodeError, DurationLimitError
 from yt_dlp import YoutubeDL
 from typing import List, Dict, Union
 from asyncio import Queue, QueueEmpty as Empty
 from pyrogram.types import *
+
+
 
 
 
@@ -177,5 +180,27 @@ def clear(chat_id: int):
 
 
 # ===================================================================================== #
+
+
+
+async def get_audio_stream(link):
+    ydl_opts = {
+        "format": "bestaudio/best",
+        "outtmpl": "downloads/%(id)s.%(ext)s",
+        "geo_bypass": True,
+        "nocheckcertificate": True,
+        "quiet": True,
+        "no_warnings": True,
+    }
+    x = yt_dlp.YoutubeDL(ydl_opts)
+    info = x.extract_info(link, False)
+    audio = os.path.join(
+        "downloads", f"{info['id']}.{info['ext']}"
+    )
+    if os.path.exists(audio):
+        return audio
+    x.download([link])
+    return audio
+
 
 
