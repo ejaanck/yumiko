@@ -36,19 +36,22 @@ photo = [
 
 @Yumikoo.on_message(group=10)
 async def chat_watcher_func(_, message):
-    if message.from_user:
-        us_in_db = await is_served_user(message.from_user.id)
-        if not us_in_db:
-            await add_served_user(message.from_user.id)
+    try:
+        if message.from_user:
+            us_in_db = await is_served_user(message.from_user.id)
+            if not us_in_db:
+                await add_served_user(message.from_user.id)
 
-    chat_id = (message.chat.id if message.chat.id != message.from_user.id else None)
+        chat_id = (message.chat.id if message.chat.id != message.from_user.id else None)
 
-    if not chat_id:
-        return
+        if not chat_id:
+            return
 
-    in_db = await is_served_chat(chat_id)
-    if not in_db:
-        await add_served_chat(chat_id)
+        in_db = await is_served_chat(chat_id)
+        if not in_db:
+            await add_served_chat(chat_id)
+    except:
+        pass
 
 
 # --------------------------------------------------------------------------------- #
