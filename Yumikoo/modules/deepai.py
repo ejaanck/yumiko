@@ -3,7 +3,7 @@ from pyrogram import filters
 from Yumikoo import Yumikoo
 from pyrogram.enums import ChatAction, ParseMode
 
-api_key ="api"
+api_key ="c8e3d7fc-1f7e-455b-8019-5c1b7f21047a"
 
 
 
