@@ -1,14 +1,11 @@
 import requests
-import openai
 import random
-from config import SUDO_USERS, OWNER_ID
+from config import SUDO_USERS
 from Yumikoo import Yumikoo, userbot
 from pyrogram import * 
 from pyrogram.types import *
-from Yumikoo.Helper.database import *
-from pyrogram.enums import ChatMemberStatus, ChatType
 from Yumikoo.Helper.cust_p_filters import admin_filter
-from lexica import Client
+
 
 
 
@@ -39,106 +36,6 @@ strict_txt = [
 ]
 
 
-
-# ========================================= #
-
-
-def main(prompt: str) -> str:
-    client = Client()
-    response = client.palm(prompt)
-    return response["content"].strip()
-
-
-# ========================================= #
-
-
-api_key = "BLUE-AI-25154789-6280048819-123-white-kazu-6280048819"
-
-def get_response(user_id, query):
-    params = {
-        "user_id": user_id,
-        "query": query,
-        "BOT_ID": 6632922889
-    }
-
-    headers = {
-        "api_key": api_key
-        
-    }
-
-    response = requests.get("https://blue-api.vercel.app/chatbot1", params=params, headers=headers)
-    return response.json()
-
-
-
-# ========================================= #
-
-openai.api_key = "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"
-
-completion = openai.Completion()
-
-start_sequence = "\nYumikoo:"
-restart_sequence = "\nPerson:"
-session_prompt = chatbot_txt
-session = {}
-
-def ask(question, chat_log=None):
-    prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt_text,
-        temperature=0.8,
-        max_tokens=250,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.3,
-        stop=["\n"],
-    )
-    story = response['choices'][0]['text']
-    return str(story)
-
-
-def append_interaction_to_chat_log(question, answer, chat_log=None):
-    if chat_log is None:
-        chat_log = session_prompt
-    return f'{chat_log}{restart_sequence} {question}{start_sequence}{answer}'
-
-
-# ========================================= #
-
-
-
-
-
-
-@Yumikoo.on_message(filters.text, group=200)
-async def chatbot_reply(Yumikoo: Yumikoo, message):
-    bot_id = 6632922889
-    reply = message.reply_to_message
-    if reply and reply.from_user.id == bot_id:
-        query = message.text
-        try:
-            chat_log = session.get('chat_log')
-            answer = ask(query, chat_log)
-            session['chat_log'] = append_interaction_to_chat_log(Message, answer, chat_log)
-            await message.reply(str(answer), quote=True)
-        except Exception as e:
-            print(f"Error: {e}")
-            try:
-                response = main(query)
-                return await message.reply(response) 
-            except Exception as e:
-                print(f"Error: {e}")
-                try:               
-                    response = get_response(message.from_user.id, query)
-                    await message.reply_text(response["result"]["text"])
-                except Exception as e:
-                    print(f"Error: {e}")
-
-
-
-# ========================================= #
-
  
 ban = ["ban","boom"]
 unban = ["unban",]
@@ -155,7 +52,7 @@ channel = ["channel"]
 # ========================================= #
 
 
-@Yumikoo.on_message(filters.command("iroko", prefixes=["h", "H"]) & admin_filter)
+@Yumikoo.on_message(filters.command(["umi","umiko"], prefixes=["y", "Y"]) & admin_filter)
 async def restriction_Yumikoo(Yumikoo :Yumikoo, message):
     reply = message.reply_to_message
     chat_id = message.chat.id
@@ -242,27 +139,5 @@ async def restriction_Yumikoo(Yumikoo :Yumikoo, message):
                        )
                      )
                 await message.reply("demoted !")
-
-
-
-
-
-@Yumikoo.on_message(filters.command(["iroko"], prefixes=["h", "H"]) & filters.user(OWNER_ID))
-async def assistant(_, message): 
-    bruh = message.text.split(maxsplit=1)[1]
-    data = bruh.split(" ")
-    for groups in data:
-        if groups in group:
-            created_chat = await userbot.create_group("group", 6632922889)
-            chat_id = created_chat.id
-            link = await userbot.export_chat_invite_link(chat_id=chat_id)
-            await Yumikoo.send_message(message.chat.id, text=f"Sir, the group is ready.\nLink: {link}")
-            
-    for channels in data:
-        if channels in channel:
-            created_channel = await userbot.create_channel("Channel", "No Description")
-            chat_id = created_channel.id
-            link = await userbot.export_chat_invite_link(chat_id=chat_id)
-            await Yumikoo.send_message(message.chat.id, text=f"Sir, the channel is ready.\nLink: {link}")
 
 
