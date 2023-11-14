@@ -17,7 +17,7 @@ from Yumikoo.Helper import requirements as rq
 from Yumikoo.Helper.errors import DurationLimitError
 from pytgcalls.types import Update
 from pytgcalls.types import AudioPiped, AudioQuality, AudioParameters
-
+from Yumikoo.Helper.requirements import get_audio_stream
 
 
 DURATION_LIMIT = 300
