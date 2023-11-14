@@ -10,7 +10,7 @@ psycopg2
 gpytranslate
 matplotlib==3.7.1
 motor
-openai
+openai==0.28
 pyttsx3
 pymongo==4.3.3
 pillow==9.5.0
