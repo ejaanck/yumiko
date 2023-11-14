@@ -47,7 +47,7 @@ async def telegraph_command(_, message: Message):
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_text(
-            f"**ʜᴇʟʟᴏ {message.from_user.mention}!**\n**ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ:** [🌿](https://telegra.ph{response[0]})",
+            f"**ʜᴇʟʟᴏ {message.from_user.mention}!**\n**ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ:** [🍒](https://telegra.ph{response[0]})",
             reply_markup=reply_markup,
         )
     except Exception as err:
