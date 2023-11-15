@@ -10,7 +10,7 @@ from pyrogram.enums import *
 
 #BOT FILE NAME
 from Yumikoo import Yumikoo
-from Yumikoo.Config import COMMAND_HANDLER
+from Config import COMMAND_HANDLER
 from Yumikoo.database.couples_db import _get_image, get_couple, save_couple
 
 def dt():
