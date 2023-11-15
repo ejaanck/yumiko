@@ -1,7 +1,7 @@
 import os
 from pyrogram import filters
 from Yumikoo import Yumikoo, BOT_USERNAME
-from Yumikoo.helpers import getFile, UpscaleImages
+from Yumikoo import Yumikoo 
 
 @Yumikoo.on_message(filters.command("upscale"))
 async def upscaleImages(_, message):
