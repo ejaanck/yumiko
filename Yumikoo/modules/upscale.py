@@ -4,7 +4,7 @@ from Yumikoo import Yumikoo, BOT_USERNAME
 from Yumikoo.Config import COMMAND_HANDLER
 from Yumikoo.helpers import getFile, UpscaleImages
 
-@Yumikoo.on_message(filters.command("upscale")
+@Yumikoo.on_message(filters.command("upscale"))
 async def upscaleImages(_, message):
     file = await getFile(message)
     if file is None:
