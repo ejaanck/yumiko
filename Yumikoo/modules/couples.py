@@ -9,7 +9,7 @@ from pyrogram.enums import *
 
 #BOT FILE NAME
 from Yumikoo import Yumikoo as app
-from Yumikoo.Hepler.databse.couplesdb import _get_image, get_couple, save_couple
+from Yumikoo.Hepler.databse.couplesdb import _get_lovers
 
 def dt():
     now = datetime.now()
