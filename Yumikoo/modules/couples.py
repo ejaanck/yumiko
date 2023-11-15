@@ -10,7 +10,7 @@ from pyrogram.enums import *
 
 #BOT FILE NAME
 from Yumikoo import Yumikoo
-from Yumikoo.database.couples_db import _get_image, get_couple, save_couple
+from Yumikoo.database.couplesdb import _get_image, get_couple, save_couple
 
 def dt():
     now = datetime.now()
