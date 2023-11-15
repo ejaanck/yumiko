@@ -187,7 +187,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["yt", "play"], prefixes=["!"]))
+@Yumikoo.on_message(filters.command(["yt", "play"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))
 async def play(_, message: Message):
     global que
     global useer
@@ -331,7 +331,7 @@ async def play(_, message: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["skip", "next"], prefixes=["/", "!"]) & admin_filter)
+@Yumikoo.on_message(filters.command(["skip", "next"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]) & admin_filter)
 async def skip(_, message: Message):    
     ACTV_CALLS = []
     chat_id = message.chat.id
@@ -422,7 +422,7 @@ async def join_userbot(_,msg:Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["pause"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["pause"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))
 async def pause(_, msg: Message):
     chat_id = msg.chat.id
     if str(chat_id) in str(pytgcalls.active_calls):
@@ -434,7 +434,7 @@ async def pause(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["resume"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["resume"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))    
 async def resume(_, msg: Message):
     chat_id = msg.chat.id
     if str(chat_id) in str(pytgcalls.active_calls):
@@ -447,7 +447,7 @@ async def resume(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["end"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["end"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))    
 async def stop(_, msg: Message):
     chat_id = msg.chat.id
     if str(chat_id) in str(pytgcalls.active_calls):
@@ -460,7 +460,7 @@ async def stop(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command(["leavevc"], prefixes=["/", "!"]))    
+@Yumikoo.on_message(filters.command(["leavevc"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))    
 async def leavevc(_, msg: Message):
     chat_id = msg.chat.id
     await pytgcalls.leave_group_call(chat_id)
@@ -470,7 +470,7 @@ async def leavevc(_, msg: Message):
 # --------------------------------------------------------------------------------------------------------- #
 
 
-@Yumikoo.on_message(filters.command("volume", prefixes="/"))
+@Yumikoo.on_message(filters.command(["volume"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"]))
 async def change_volume(client, message):
     chat_id = message.chat.id
     args = message.text.split()
