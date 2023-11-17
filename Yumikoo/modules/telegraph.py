@@ -27,7 +27,7 @@ async def telegraph_command(_, message: Message):
             and replied.document.file_size <= 5242880
         )
     ):
-        await message.reply_text("**ᴜɴsᴜᴘᴘᴏʀᴛᴇᴅ ғɪʟᴇ ғᴏʀᴍᴀᴛ !**")
+        await message.reply_text("**ᴜɴsᴜᴘᴘᴏʀᴛᴇᴅ ғɪʟᴇ ғᴏʀᴍᴀᴛ !!**")
         return
     download_location = await Yumikoo.download_media(
         message=message.reply_to_message, file_name="root/nana/"
