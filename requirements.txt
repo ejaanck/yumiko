@@ -18,7 +18,7 @@ pickledb<1
 pySmartDL
 arq
 gtts
-ffmpeg-python
+ffmpeg-python==0.2.0
 py-tgcalls==1.0.1
 pyrogram==2.0.106
 prettytable==3.6.0
@@ -38,4 +38,3 @@ carbon
 lexica-api
 pykeyboard
 unidecode
-https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
