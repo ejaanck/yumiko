@@ -12,7 +12,7 @@ loop = asyncio.get_event_loop()
 async def sumit_boot():
     for all_module in ALL_MODULES:
         importlib.import_module("Yumikoo.modules." + all_module)
-    print("»»»»  ᴅᴇᴘʟᴏʏ sᴜᴄᴄᴇssғᴜʟʟʏ ✨ 🎉")
+    print("»»»»  ᴅᴇᴘʟᴏʏ sᴜᴄᴄᴇssғᴜʟʟʏ ✨ 🎉....")
     await idle()
     print("»» ɢᴏᴏᴅ ʙʏᴇ ! sᴛᴏᴘᴘɪɴɢ ʙᴏᴛ.")
 
