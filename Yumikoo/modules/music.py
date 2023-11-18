@@ -20,7 +20,7 @@ from pytgcalls.types import AudioPiped, AudioQuality, AudioParameters
 from Yumikoo.Helper.requirements import get_audio_stream
 
 
-DURATION_LIMIT = 300
+DURATION_LIMIT = 30000
 
 keyboard = InlineKeyboardMarkup([
         [
