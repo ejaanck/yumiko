@@ -19,7 +19,7 @@ pySmartDL
 arq
 gtts
 ffmpeg-python
-py-tgcalls==1.0.1
+py-tgcalls==0.9.7
 pyrogram==2.0.106
 prettytable==3.6.0
 python-dotenv==1.0.0
